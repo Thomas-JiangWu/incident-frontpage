@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from "react";
+import IncidentList from "./components/IncidentList";
+import IncidentForm from "./components/IncidentForm";
 
-function App() {
+export default function App() {
+  const [editingIncident, setEditingIncident] = useState(null);
+  const [reload, setReload] = useState(false); // State to trigger reloading the list
+
+  const handleEdit = (incident) => {
+    setEditingIncident(incident);
+  };
+
+  const handleSave = () => {
+    setEditingIncident(null);
+    setReload(!reload); // Toggle reload state to refresh the list
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <h1>Incident Management</h1>
+        <IncidentForm
+            incident={editingIncident}
+            onSave={handleSave}
+            onCancel={() => setEditingIncident(null)}
+        />
+        <IncidentList onEdit={handleEdit} key={reload} />
+      </div>
   );
 }
-
-export default App;
