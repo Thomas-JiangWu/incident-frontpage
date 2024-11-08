@@ -9,6 +9,7 @@ This is the frontpage project of the [incident](https://github.com/Thomas-JiangW
 There are 2 ways to run this project:
 - Run this project using `npm` command:
 ```sh
+npm install axios
 npm start
 ```
 - Run this project using `Docker`:
